@@ -24,7 +24,7 @@
     "wds": "webpack-dev-server --progress --config ./config/webpack/livereload.babel.js"
   },
   "config": {
-    "cssClassPattern": "[name]_[local]__[hash:base64:5]'"
+    "cssClassPattern": "[name]_[local]__[hash:base64:5]"
   },
   "license": "UNLICENSED",
   "private": true,
