@@ -12,7 +12,7 @@
     "build:shared": "babel src/shared -d build/shared && cpx src/shared/**/*.css build/shared",
     "depcheck": "depcheck --ignores prop-types,babel-core,babel-loader,babel-preset-env,css-loader,eslint-plugin-babel,file-loader,postcss-cssnext,postcss-discard-comments,postcss-global-import,postcss-import,postcss-inline-svg,postcss-loader,postcss-modules-values,postcss-sass-color-functions,precss,style-loader,url-loader,webpack-dev-server",
     "docker": "docker build -t ajm.react-universal .",
-    "docker:start": "docker run -p 8081:8080 -u \"node\" -it --rm --name ajm.react-universal ajm.react-universal",
+    "docker:start": "docker run -p 80:8080 -u \"node\" -it --rm --name ajm.react-universal ajm.react-universal",
     "eslint-fix": "eslint src/** --fix",
     "eslint": "eslint src/**",
     "start": "node build/server",
