@@ -1,16 +1,27 @@
 {
-  "name": "ajm.react-template",
+  "name": "ajm.react-universal",
   "version": "1.0.0",
+  "main": "index.js",
+  "engines": {
+    "node": "7.10.x"
+  },
   "scripts": {
+    "build": "npm run build:client && npm run build:server && npm run build:shared",
+    "build:client": "webpack --colors --progress --display-error-details --config ./config/webpack/client.babel.js",
+    "build:server": "babel src/server -d build/server",
+    "build:shared": "babel src/shared -d build/shared && cpx src/shared/**/*.css build/shared",
     "depcheck": "depcheck --ignores prop-types,babel-core,babel-loader,babel-preset-env,css-loader,eslint-plugin-babel,file-loader,postcss-cssnext,postcss-discard-comments,postcss-global-import,postcss-import,postcss-inline-svg,postcss-loader,postcss-modules-values,postcss-sass-color-functions,precss,style-loader,url-loader,webpack-dev-server",
+    "docker": "docker build -t ajm.react-universal .",
+    "docker:start": "docker run -p 8081:8080 -u \"node\" -it --rm --name ajm.react-universal ajm.react-universal",
     "eslint-fix": "eslint src/** --fix",
     "eslint": "eslint src/**",
+    "start": "node build/server",
     "start:break": "nodemon -w src/server -w src/shared -w config -w package.json index.js --exec 'babel-node --inspect=8009 --debug-brk'",
     "start:debug": "nodemon -w src/server -w src/shared -w config -w package.json index.js --exec 'babel-node --inspect=8009'",
-    "start": "babel-node index.js",
+    "start:dev": "babel-node index.js",
     "start:watch": "nodemon -w src/server -w src/shared -w config -w package.json index.js --exec 'babel-node'",
     "test": "npm run eslint && npm run depcheck",
-    "wds": "webpack-dev-server --progress --config ./config/webpack/client.babel.js"
+    "wds": "webpack-dev-server --progress --config ./config/webpack/livereload.babel.js"
   },
   "config": {
     "cssClassPattern": "[name]_[local]__[hash:base64:5]'"
@@ -64,5 +75,15 @@
     "url-loader": "^0.5.7",
     "webpack": "^2.3.3",
     "webpack-dev-server": "^2.3.0"
-  }
+  },
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/penx/ajm.universal-react.git"
+  },
+  "author": "Alasdair McLeay",
+  "bugs": {
+    "url": "https://github.com/penx/ajm.universal-react/issues"
+  },
+  "homepage": "https://github.com/penx/ajm.universal-react#readme"
 }
