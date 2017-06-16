@@ -1,14 +1,15 @@
 import { version } from '../../package.json'
+import config from 'config'
 
-// TODO: config, prod
-const assetPath = 'http://localhost:9000'
+const assetPath = config.get('assetPath')
 
-// TODO: prod css, convert to React/Helmet?
+// TODO: convert to JSX/Helmet?
 
 export default function renderHtml(reactApp, state) {
   return `<!doctype html>
 <html>
   <head>
+    <link media="all" rel="stylesheet" href="${assetPath}/app.${version}.bundle.css" />
   </head>
   <body>
     <div id="app">${reactApp}</div>
@@ -19,6 +20,6 @@ export default function renderHtml(reactApp, state) {
     </script>
     <script src="${assetPath}/vendor.${version}.bundle.js"></script>
     <script src="${assetPath}/app.${version}.bundle.js"></script>
-    </body>
-  </html>`
+  </body>
+</html>`
 }

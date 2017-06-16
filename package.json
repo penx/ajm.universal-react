@@ -15,6 +15,7 @@
     "docker:start": "docker run -p 80:8080 -u \"node\" -it --rm --name ajm.react-universal ajm.react-universal",
     "eslint-fix": "eslint src/** --fix",
     "eslint": "eslint src/**",
+    "production": "npm run build && npm run docker && npm run docker:start",
     "start": "node build/server",
     "start:break": "nodemon -w src/server -w src/shared -w config -w package.json index.js --exec 'babel-node --inspect=8009 --debug-brk'",
     "start:debug": "nodemon -w src/server -w src/shared -w config -w package.json index.js --exec 'babel-node --inspect=8009'",
@@ -29,6 +30,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "config": "^1.26.1",
     "css-modules-require-hook": "^4.0.5",
     "express": "^4.14.1",
     "prop-types": "^15.5.8",
