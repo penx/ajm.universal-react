@@ -1,3 +1,5 @@
+@import "sanitize.css";
+
 .app {
   border: 1px solid red;
 }
