@@ -27,8 +27,7 @@
   "config": {
     "cssClassPattern": "[name]_[local]__[hash:base64:5]"
   },
-  "license": "UNLICENSED",
-  "private": true,
+  "license": "ISC",
   "dependencies": {
     "config": "^1.26.1",
     "css-modules-require-hook": "^4.0.5",
@@ -73,12 +72,16 @@
     "webpack": "^2.3.3",
     "webpack-dev-server": "^2.3.0"
   },
-  "description": "",
+  "description": "Template Universal React website",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/penx/ajm.universal-react.git"
   },
-  "author": "Alasdair McLeay",
+  "author": {
+    "name": "Alasdair McLeay",
+    "email": "alasdair.mcleay@me.com",
+    "url": "https://www.linkedin.com/in/alasdairmcleay/"
+  },
   "bugs": {
     "url": "https://github.com/penx/ajm.universal-react/issues"
   },
