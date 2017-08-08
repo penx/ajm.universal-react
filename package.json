@@ -1,5 +1,5 @@
 {
-  "name": "ajm.react-universal",
+  "name": "Universal React Template",
   "version": "1.0.0",
   "main": "index.js",
   "engines": {
@@ -72,7 +72,7 @@
     "webpack": "^2.3.3",
     "webpack-dev-server": "^2.3.0"
   },
-  "description": "Template Universal React website",
+  "description": "Universal React Template",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/penx/ajm.universal-react.git"
