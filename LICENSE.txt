@@ -1,4 +1,5 @@
-ISC License for template Universal React Template (https://github.com/penx/ajm.universal-react)
+ISC License for template ajm.universal-react (Universal React Template)
+https://github.com/penx/ajm.universal-react
 
 Copyright 2017 Alasdair McLeay
 
