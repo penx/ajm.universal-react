@@ -1,0 +1,15 @@
+.notfound {
+  border: 1px solid blue;
+}
+
+.code {
+  font-size: 24px;
+}
+
+.name {
+  font-size: 16px;
+}
+
+.description {
+  font-size: 12px;
+}
