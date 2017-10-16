@@ -1,5 +1,4 @@
 import express from 'express'
-import 'css-modules-require-hook/preset'
 
 import routes from './routes'
 import middleware from './middleware'
