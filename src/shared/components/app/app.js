@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Helmet } from 'react-helmet'
 
 import styles from './app.css'
 
@@ -8,7 +9,10 @@ class App extends Component {
   render() {
     return (
       <div className={styles.app}>
-        <h1>Initial Application</h1>
+        <Helmet>
+          <title>React Universal Template</title>
+        </Helmet>
+        <h1>React Universal Template</h1>
         <Router />
       </div>
     )

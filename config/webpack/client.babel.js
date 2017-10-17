@@ -1,28 +1,27 @@
 import webpack from 'webpack'
 import path from 'path'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 import pkg, { version } from '../../package.json'
 
 const sourcePath = path.join(__dirname, '../../src')
 const staticsPath = path.join(__dirname, '../../build/client')
 
-const generateWebPackConfig = ({liveReload = false, devServer = false, liveReloadPort = 9000, devtool = undefined} = {}) => {
-  return {
+const generateWebPackConfig = ({
+  liveReload = false, devServer = false, devServerPort = 9000, devtool = undefined } = {}) => ({
     context: sourcePath,
     entry: {
       app: liveReload ? [
-       'react-hot-loader/patch',
-       `webpack-dev-server/client?http://localhost:${liveReloadPort}`,
-       './client/index.livereload.js'
-     ] : './client/index.js'
+        'react-hot-loader/patch',
+        `webpack-dev-server/client?http://localhost:${devServerPort}`,
+        './client/index.livereload.js'
+      ] : './client/index.js'
     },
     output: {
       path: staticsPath,
       filename: `[name].${version}.bundle.js`,
       libraryTarget: 'umd',
-      publicPath: devServer ? `http://localhost:${liveReloadPort}/` : '/client/'
+      publicPath: devServer ? `http://localhost:${devServerPort}/` : '/client/'
     },
     module: {
       rules: [{
@@ -36,7 +35,7 @@ const generateWebPackConfig = ({liveReload = false, devServer = false, liveReloa
             'react'
           ],
           plugins: liveReload ? ['react-hot-loader/babel'] : undefined
-        }},
+        } },
         liveReload ? {
           test: /\.css$/,
           use: [
@@ -68,15 +67,15 @@ const generateWebPackConfig = ({liveReload = false, devServer = false, liveReloa
             ]
           })
         },
-        {
-          test: /\.(jpg|png|svg)$/,
-          use: [
-            'file-loader'
-          ]
-        },{
-          test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-          loader: 'file-loader'
-        }
+      {
+        test: /\.(jpg|png|svg)$/,
+        use: [
+          'file-loader'
+        ]
+      }, {
+        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+        loader: 'file-loader'
+      }
 
       ],
     },
@@ -100,15 +99,14 @@ const generateWebPackConfig = ({liveReload = false, devServer = false, liveReloa
       new ExtractTextPlugin({ filename: `[name].${version}.bundle.css`, allChunks: true, ignoreOrder: true }),
       new webpack.HotModuleReplacementPlugin()
     ],
-    devtool: devtool,
+    devtool,
     target: 'web',
-    devServer: liveReload ? {
-      port: liveReloadPort,
+    devServer: devServer ? {
+      port: devServerPort,
       hotOnly: true,
       headers: { 'Access-Control-Allow-Origin': '*' }
     } : undefined
-  }
-}
+  })
 
 export default generateWebPackConfig()
 export { generateWebPackConfig }

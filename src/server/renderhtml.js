@@ -1,5 +1,6 @@
-import { version } from '../../package.json'
 import config from 'config'
+
+import { version } from '../../package.json'
 
 const assetPath = config.get('assetPath')
 
