@@ -1,6 +1,10 @@
 import webpack from 'webpack'
 import path from 'path'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import Visualizer from 'webpack-visualizer-plugin'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
+
 
 import pkg, { version } from '../../package.json'
 
@@ -8,7 +12,14 @@ const sourcePath = path.join(__dirname, '../../src')
 const staticsPath = path.join(__dirname, '../../build/client')
 
 const generateWebPackConfig = ({
-  liveReload = false, devServer = false, devServerPort = 9000, devtool = undefined } = {}) => ({
+  analyse = false,
+  minifify = false,
+  liveReload = false,
+  devServer = false,
+  devServerPort = 9000,
+  devtool = undefined
+} = {}) => {
+  const config = {
     context: sourcePath,
     entry: {
       app: liveReload ? [
@@ -30,7 +41,7 @@ const generateWebPackConfig = ({
         loader: 'babel-loader',
         query: {
           presets: [
-            ['es2015', { modules: false }],
+              ['es2015', { modules: false }],
             'stage-1',
             'react'
           ],
@@ -59,6 +70,8 @@ const generateWebPackConfig = ({
                 loader: 'css-loader',
                 options: {
                   modules: true,
+                  minimize: minifify,
+                  sourceMap: true,
                   importLoaders: 1,
                   localIdentName: pkg.config.cssClassPattern
                 }
@@ -79,34 +92,48 @@ const generateWebPackConfig = ({
 
       ],
     },
-    resolve: {
-      extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx'],
-      modules: [
-        path.resolve(__dirname, '../../node_modules'),
-        sourcePath
-      ]
-    },
     plugins: [
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
         chunks: ['app'],
         minChunks(module) {
           return module.context
-            && module.context.indexOf('node_modules') !== -1
+              && module.context.indexOf('node_modules') !== -1
         }
       }),
       new webpack.NoEmitOnErrorsPlugin(),
-      new ExtractTextPlugin({ filename: `[name].${version}.bundle.css`, allChunks: true, ignoreOrder: true }),
-      new webpack.HotModuleReplacementPlugin()
+      new ExtractTextPlugin({ filename: `[name].${version}.bundle.css`, allChunks: true, ignoreOrder: true })
     ],
-    devtool,
+    devtool: analyse ? devtool || 'source-map' : devtool,
     target: 'web',
     devServer: devServer ? {
       port: devServerPort,
       hotOnly: true,
       headers: { 'Access-Control-Allow-Origin': '*' }
     } : undefined
-  })
+  }
+
+  if (analyse) {
+    config.plugins.unshift(
+      new Visualizer({ filename: '../../analysis/js-wvp.html' }),
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        reportFilename: '../../analysis/js-wba.html'
+      }))
+  }
+
+  if (minifify) {
+    config.plugins.unshift(new UglifyJsPlugin({
+      sourceMap: true
+    }))
+  }
+
+  if (liveReload) {
+    config.plugins.push(new webpack.HotModuleReplacementPlugin())
+  }
+
+  return config
+}
 
 export default generateWebPackConfig()
 export { generateWebPackConfig }

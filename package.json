@@ -6,15 +6,17 @@
     "node": "7.10.x"
   },
   "scripts": {
+    "analyse": "npm run build:client:analyse",
     "build": "NODE_ENV=production npm run build:client && npm run build:server && npm run build:shared",
-    "build:client": "webpack --colors --progress --display-error-details --config ./config/webpack/client.babel.js",
+    "build:client:analyse": "webpack --colors --progress --display-error-details --config ./config/webpack/analyse.babel.js && source-map-explorer --html build/client/app.1.0.0.bundle.css build/client/app.1.0.0.bundle.css.map > analysis/css.html",
+    "build:client": "webpack --colors --progress --display-error-details --config ./config/webpack/production.babel.js",
     "build:server": "babel src/server -d build/server",
     "build:shared": "babel src/shared -d build/shared && cpx src/shared/**/*.css build/shared",
-    "depcheck": "depcheck --ignores prop-types,babel-core,babel-loader,babel-preset-env,css-loader,eslint-plugin-babel,file-loader,postcss-discard-comments,postcss-import,postcss-loader,style-loader,url-loader,webpack-dev-server,sanitize.css,babel-preset-es2015,postcss-custom-media,postcss-mixins",
+    "depcheck": "depcheck --ignores prop-types,babel-core,babel-loader,babel-preset-env,css-loader,eslint-plugin-babel,file-loader,style-loader,url-loader,webpack-dev-server,sanitize.css,babel-preset-es2015,precss",
     "docker": "docker build -t ajm.react-universal .",
     "docker:start": "docker run -p 80:8080 -u \"node\" -it --rm --name ajm.react-universal ajm.react-universal",
-    "eslint-fix": "eslint src/** --fix",
-    "eslint": "eslint src/**",
+    "eslint-fix": "eslint src/**/*.js --fix",
+    "eslint": "eslint src/**/*.js",
     "production": "npm run build && npm run docker && npm run docker:start",
     "start": "NODE_ENV=production node build/server",
     "start:break": "nodemon -w src/server -w src/shared -w config -w package.json index.js --exec 'babel-node --inspect=8009 --debug-brk'",
@@ -67,10 +69,15 @@
     "precss": "^2.0.0",
     "react-helmet": "^5.2.0",
     "react-hot-loader": "3.0.0-beta.6",
+    "source-map-explorer": "^1.5.0",
     "style-loader": "^0.18.2",
+    "uglify-js": "git://github.com/mishoo/UglifyJS2.git#harmony-v2.8.22",
+    "uglifyjs-webpack-plugin": "0.4.4",
     "url-loader": "^0.5.7",
     "webpack": "^2.3.3",
-    "webpack-dev-server": "^2.3.0"
+    "webpack-bundle-analyzer": "^2.9.0",
+    "webpack-dev-server": "^2.3.0",
+    "webpack-visualizer-plugin": "^0.1.11"
   },
   "description": "Universal React Template",
   "repository": {
