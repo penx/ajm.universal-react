@@ -1,5 +1,22 @@
 @import "sanitize.css";
+@import "../../styles/variables/media";
+@import "../../styles/utils/mixins";
+@import "../../styles/variables/fonts";
+
+body {
+  font-family: $body_font;
+}
+
+h1, h2, h3, h4 {
+  @mixin title;
+}
 
 .app {
   border: 1px solid red;
+}
+
+@media(--desktop-up) {
+  .app {
+    border: 1px solid blue;
+  }
 }

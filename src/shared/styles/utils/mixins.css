@@ -1,0 +1,8 @@
+@import "../../styles/variables/fonts";
+
+@define-mixin title {
+  font-family: $title_font;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: normal;
+}

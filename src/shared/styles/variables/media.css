@@ -1,0 +1,15 @@
+/*
+  https://medium.freecodecamp.org/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862
+*/
+
+/* Mobile first */
+@custom-media --tablet-portrait-up (min-width: 600px);
+@custom-media --tablet-landscape-up (min-width: 900px);
+@custom-media --desktop-up (min-width: 1200px);
+@custom-media --big-desktop-up (min-width: 1800px);
+
+/* Mobile last (avoid) */
+@custom-media --phone-down (max-width: 599px);
+@custom-media --tablet-portrait-down (max-width: 899px);
+@custom-media --tablet-landscape-down (max-width: 1199px);
+@custom-media --desktop-down (max-width: 1799px);
