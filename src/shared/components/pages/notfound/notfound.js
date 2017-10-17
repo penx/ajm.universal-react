@@ -9,6 +9,6 @@ const NotFound = () => (
     <h2 className={styles.name}>Error</h2>
     <p className={styles.description}>Page not found, <Link to="/">go home</Link></p>
   </div>
-  )
+)
 
 export default NotFound

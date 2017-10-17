@@ -11,13 +11,11 @@ function reactRouteHandler(req, res) {
   const context = {}
   const store = configureStore({})
 
-  const reactApp = renderToString(
-    <Provider store={store}>
-      <StaticRouter location={req.url} context={context}>
-        <App />
-      </StaticRouter>
-    </Provider>
-    )
+  const reactApp = renderToString(<Provider store={store}>
+    <StaticRouter location={req.url} context={context}>
+      <App />
+    </StaticRouter>
+  </Provider>)
 
   if (context.status) {
     res.status(context.status)

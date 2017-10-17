@@ -5,13 +5,7 @@
     "flowtype"
   ],
   "env": {
-    "browser": true,
-    "es6": true,
-    "node": true,
-    "jest": true
-  },
-  "ecmaFeatures": {
-    "defaultParams": true
+    "es6": true
   },
   "rules": {
     "semi": [2, "never"],
@@ -19,6 +13,7 @@
     "comma-dangle": 0,
     "react/jsx-filename-extension": 0,
     "react/prefer-stateless-function": 0,
-    "react/forbid-prop-types": 0
+    "react/forbid-prop-types": 0,
+    "react/jsx-closing-tag-location": 0
   }
 }

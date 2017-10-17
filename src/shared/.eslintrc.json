@@ -1,4 +1,8 @@
 {
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "rules": {
     "jsx-a11y/html-has-lang": 0
   }
