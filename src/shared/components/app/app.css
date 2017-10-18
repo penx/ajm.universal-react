@@ -1,5 +1,5 @@
 @import "sanitize.css";
-@import "../../styles/variables/media";
+@import '../../styles/variables/media';
 @import "../../styles/utils/mixins";
 @import "../../styles/variables/fonts";
 

@@ -7,9 +7,15 @@ import { App } from '../shared/components'
 import configureStore from '../shared/store/configureStore'
 import renderHtml from './renderhtml'
 
+const initialState = {
+  example: {
+    1: 'Example State'
+  }
+}
+
 function reactRouteHandler(req, res) {
   const context = {}
-  const store = configureStore({})
+  const store = configureStore(initialState)
 
   const reactApp = renderToString(<Provider store={store}>
     <StaticRouter location={req.url} context={context}>
