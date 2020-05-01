@@ -24,7 +24,9 @@
     "start:dev": "babel-node index.js",
     "start:watch": "nodemon -w src/server -w src/shared -w config -w package.json index.js --exec 'babel-node'",
     "test": "npm run eslint && npm run depcheck",
-    "wds": "webpack-dev-server --progress --config ./config/webpack/livereload.babel.js"
+    "wds": "webpack-dev-server --progress --config ./config/webpack/livereload.babel.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "config": {
     "cssClassPattern": "[name]_[local]__[hash:base64:5]"
@@ -44,7 +46,8 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "sanitize.css": "^5.0.0",
-    "uglify-js": "git://github.com/mishoo/UglifyJS2.git#harmony-v2.8.22"
+    "uglify-js": "git://github.com/mishoo/UglifyJS2.git#harmony-v2.8.22",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",
@@ -96,5 +99,6 @@
   "bugs": {
     "url": "https://github.com/penx/ajm.universal-react/issues"
   },
-  "homepage": "https://github.com/penx/ajm.universal-react#readme"
+  "homepage": "https://github.com/penx/ajm.universal-react#readme",
+  "snyk": true
 }
